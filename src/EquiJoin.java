@@ -51,14 +51,21 @@ public class EquiJoin {
 			List<String> R_Table = new ArrayList<String>();
 			List<String> S_Table = new ArrayList<String>();
 //			List<String> joinResult = new ArrayList<String>();
-			
+			boolean firstVal = true;
+			String firstTablename = "";
 			for(Text value: values) {
 				String[] tableValues = value.toString().trim().split(",");
-				if(tableValues[0].equals("R")) {
+				
+				if(firstVal) {
+					firstTablename = tableValues[0];
+					firstVal = false;
+				}
+				
+				if(tableValues[0].equals(firstTablename)) {
 					// Put it in R table
 					R_Table.add(value.toString());
 				}
-				else if(tableValues[0].equals("S")) {
+				else {
 					// Put it in S table
 					S_Table.add(value.toString());
 				}
